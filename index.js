@@ -46,52 +46,66 @@ let keys
 //
 //   allKeys.push(ret)
 // }
+var paths = ''
+
 scan(jsonToExtract)
 
-function scan(obj, key)
+
+function scan(obj, deep = 0)
 {
-    var k;
+    let k;
     let path = ''
+    let i = 0;
     if (obj instanceof Object) {
         for (k in obj){
+
+            let tab = ''
+            for(let j=0; j < deep; j++)(
+              tab += '\t'
+            )
             if (obj.hasOwnProperty(k)){
-                path += '.' + k
-                console.log('scanning property ' + path)
-                scan( obj[k] ,path);
-                allKeys.push(k)
+              // console.log('scanning property ' + path)
+              // console.log(chalk.red(k))
+              // paths += '.' + k
+              // Les fins des objets
+              // console.log(typeof parseInt(k))
+              // console.log((typeof parseInt(k) === "number"))
+              // console.log(typeof parseInt(k))
+
+              if(i === 0 && isNaN(parseInt(k))) {
+                // console.log(chalk.magenta(typeof parseInt(k)))
+                console.log(tab + chalk.blue(k))
+                if(typeof obj[k] !== "object")
+                  console.log(tab + '\t' + chalk.cyan(obj[k]))
+                i++;
+              } else {
+                console.log(tab + chalk.blue(k))
+                // debug(tab + obj[k])
+                // console.log(tab + obj[k])
+                // console.log(chalk.red(typeof obj[k]))
+                // console.log(chalk.red(obj[k]))
+                if(typeof obj[k] === "object") {
+                  // console.log(obj[k])
+                }
+                else {
+                  console.log(chalk.cyan(tab + '\t\t' + obj[k]))
+                }
+                i++;
+              }
+              deep = i;
+              scan(obj[k], deep);
+
+              // allKeys.push(k)
+            }
+            else {
+              console.log('me')
             }
         }
     } else {
-        console.log('found value : ' + chalk.green(obj) + ' in ' + chalk.red(key))
-    };
+        // console.log('found value : ' + chalk.green(obj) + ' in ' + chalk.red(key))
+    }
 
 };
-
-
-// debug(allKeys)
-
-  fs.writeJSONSync('test.json',allKeys)
-// ret[Object.getOwnPropertyNames(jsonToExtract)]
-
-
-
-// var obj = { 0: "a", 1: "b", 2: "c"};
-// console.log(Object.getOwnPropertyNames(obj).sort());
-
-// _.each(jsonToExtract, function (key, value) {
-//   debug(value)
-// })
-
-// console.log(getObjectSize(jsonToExtract))
-//
-// objectSize = getObjectSize(jsonToExtract)
-//
-// for(let i = 0; i < objectSize; i++) {
-//   console.log(i)
-//   console.log(jsonToExtract.key)
-// }
-
-
 
 // getKeys(jsonToExtract)
 

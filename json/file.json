@@ -1,15 +1,53 @@
 {
-  "entreprise": {
-    "name": "YesnYou",
-    "groupe": [
-      {
-        "name": "yesnyou",
-        "patron": "STYLIANOS "
-      },
-      {
-        "name": "yesnyou digital",
-        "patron": "NICOLAS"
-      }
-    ]
+  "key1": "truc1",
+  "key2": "truc2",
+  "key3": {
+    "key4": "truc4",
+    "key5": "truc5",
+    "key6": {
+      "key7": "truc7",
+      "key8": "truc8"
+    }
   }
 }
+
+ === function split(obj)
+ [
+   {"key1": "truc1", "deep": false},
+   {"key2": "truc2", "deep": false},
+   {  "key3": {
+       "key4": "truc4",
+       "key5": "truc5",
+       "key6": {
+         "key7": "truc7",
+         "key8": "truc8"
+       },
+       "deep": true
+     }
+   }
+ ]
+
+ ???
+ if deep !== false / if !deep
+  split(obj)
+
+[
+  {"key4": "truc4", "deep": 0},
+  {"key5": "truc5", "deep": 0},
+  {
+    "key6": {
+      "key7": "truc7",
+      "key8": "truc8"
+    },
+    "deep": 1
+  }
+]
+
+ ???
+ if deep !== false / if !deep
+  split(obj)
+
+[
+  {"key7": "truc7", "deep": 0},
+  {"key8": "truc8", "deep": 0}
+]
