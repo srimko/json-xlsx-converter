@@ -15,80 +15,53 @@ var result = CSON.createCSONString(jsonToExtract )
 if ( result instanceof Error ) {
 	console.log(result.stack)
 } else {
-	console.log(result)
-}
+	fs.writeFileSync('result.cson', result, 'utf-8')
 
-fs.writeFileSync('result.cson', result, 'utf-8')
+	file = fs.readFileSync('result.cson', 'utf-8')
 
-file = fs.readFileSync('result.cson', 'utf-8')
+	let re = /\n/
 
-// console.log(file)
+	let fileWhitoutLineFeed = file.split(re)
 
+	console.log(fileWhitoutLineFeed)
 
+	let parentPropoerty = ''
+	let prevDeep = 0
+	let deep = 0
 
+	for(let i = 0; i < fileWhitoutLineFeed.length; i++) {
+		let re = /\t/
 
-let re = /\n/
-//
-let fileWhitoutLineFeed = file.split(re)
+		let regex = /\t/
 
-// _.each(file.split(re), function(val) {
-// 	// let re = /\t/
-// 	// if(re.test(val)) {
-// 	// 	console.log('yes', val)
-// 	// } else {
-// 	// 	console.log('no', val)
-// 	// }
-//
-//
-// 	let re = /\t/
-// 	if(!re.test(val)) {
-// 		console.log('no', val)
-// 		// I will create a new line in my xlsx file
-// 	} else {
-// 		console.log('yes', val)
-// 	}
-// })
+		deep = fileWhitoutLineFeed[i].split(regex).length
 
-let parentPropoerty = ''
-let prevDeep = 0
-let deep = 0
+		console.log(red('---'))
 
-for(let i = 0; i < fileWhitoutLineFeed.length; i++) {
-	let re = /\t/
-
-	let regex = /\t/
-
-	// console.log(fileWhitoutLineFeed[i].split(regex).length)
-
-	deep = fileWhitoutLineFeed[i].split(regex).length
-
-	console.log(red('---'))
-
-	if(!re.test(fileWhitoutLineFeed[i])) {
-		parentPropoerty = getCleanKey(fileWhitoutLineFeed[i])
-
-		console.log(grey(parentPropoerty) + ':' + green(getCleanValue(fileWhitoutLineFeed[i])))
-
-	} else {
-		if(prevDeep === deep) {
-			let oldParentPropoerty = parentPropoerty.split('.')
-
-			let tempProperty = oldParentPropoerty
-
-			let v = tempProperty.pop()
-			tempProperty.push(getCleanKey(fileWhitoutLineFeed[i]))
-
-			parentPropoerty = tempProperty.join('.')
+		if(!re.test(fileWhitoutLineFeed[i])) {
+			parentPropoerty = getCleanKey(fileWhitoutLineFeed[i])
 
 			console.log(grey(parentPropoerty) + ':' + green(getCleanValue(fileWhitoutLineFeed[i])))
+
 		} else {
-			parentPropoerty = parentPropoerty + '.' + getCleanKey(fileWhitoutLineFeed[i])
-			console.log(grey(parentPropoerty) + ':' + green(getCleanValue(fileWhitoutLineFeed[i])))
+			if(prevDeep === deep) {
+				let oldParentPropoerty = parentPropoerty.split('.')
+
+				let tempProperty = oldParentPropoerty
+
+				let v = tempProperty.pop()
+				tempProperty.push(getCleanKey(fileWhitoutLineFeed[i]))
+
+				parentPropoerty = tempProperty.join('.')
+
+				console.log(grey(parentPropoerty) + ':' + green(getCleanValue(fileWhitoutLineFeed[i])))
+			} else {
+				parentPropoerty = parentPropoerty + '.' + getCleanKey(fileWhitoutLineFeed[i])
+				console.log(grey(parentPropoerty) + ':' + green(getCleanValue(fileWhitoutLineFeed[i])))
+			}
 		}
+		prevDeep = deep
 	}
-
-	prevDeep = deep
-
 }
 
 function getCleanKey (str) {
