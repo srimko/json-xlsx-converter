@@ -2,52 +2,23 @@
   "key1": "truc1",
   "key2": "truc2",
   "key3": {
-    "key4": "truc4",
-    "key5": "truc5",
-    "key6": {
-      "key7": "truc7",
-      "key8": "truc8"
+    "key31": "truc4",
+    "key32": "truc5",
+    "key33": {
+      "key331": "truc7",
+      "key332": {
+        "key3321" : "truc",
+        "key3322" : "truc"
+      },
+      "key333": "truc8"
     }
+  },
+  "key4": "truc2",
+  "key5": "truc2",
+  "key6": "truc2",
+  "key7": "truc7",
+  "key8": {
+    "key81" : "truc",
+    "key82" : "truc"
   }
 }
-
- === function split(obj)
- [
-   {"key1": "truc1", "deep": false},
-   {"key2": "truc2", "deep": false},
-   {  "key3": {
-       "key4": "truc4",
-       "key5": "truc5",
-       "key6": {
-         "key7": "truc7",
-         "key8": "truc8"
-       },
-       "deep": true
-     }
-   }
- ]
-
- ???
- if deep !== false / if !deep
-  split(obj)
-
-[
-  {"key4": "truc4", "deep": 0},
-  {"key5": "truc5", "deep": 0},
-  {
-    "key6": {
-      "key7": "truc7",
-      "key8": "truc8"
-    },
-    "deep": 1
-  }
-]
-
- ???
- if deep !== false / if !deep
-  split(obj)
-
-[
-  {"key7": "truc7", "deep": 0},
-  {"key8": "truc8", "deep": 0}
-]
