@@ -47,14 +47,14 @@ sheet1.width(3, 50)
 
 let resetRow = 1
 _.each(paths, function(value, key) {
-  let rows = key + 2
+  let rows = key + 3
 
   let goodPaths = paths[key].replace(/^([0-9]*)\./g, '[$1].')
   goodPaths = goodPaths.replace(/\.([0-9]*)\./g, '[$1].')
   goodPaths = goodPaths.replace(/(\.([0-9]))/g, '.[$2]')
 
   let test = regex.test(goodPaths)
-  if(test) {
+  if(test && toTranslate[key] !== "") {
     console.log(green(test + ' ' + goodPaths))
 
     if(toTranslate[key] === null) {
@@ -66,6 +66,7 @@ _.each(paths, function(value, key) {
     sheet1.set(3, rows - resetRow, Entities.decode(toTranslate[key].toString()))
 
   } else {
+    console.log(red(test + ' ' + goodPaths))
     resetRow++
   }
 })
