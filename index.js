@@ -36,7 +36,9 @@ sheet1.set(3, 1, 'Target')
 _.each(paths, function(value, key) {
   let rows = key + 2
 
-  sheet1.set(1, rows, paths[key])
+  let goodPaths = paths[key].replace(/\.([0-9]*)\./g, '[$1].')
+
+  sheet1.set(1, rows, goodPaths)
   sheet1.set(2, rows, tags[key])
   sheet1.set(3, rows, Entities.decode(toTranslate[key]))
 })
