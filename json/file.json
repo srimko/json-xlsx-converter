@@ -1,24 +1,345 @@
 {
-  "key1": "truc1",
-  "key2": "truc2",
-  "key3": {
-    "key31": "truc4",
-    "key32": "truc5",
-    "key33": {
-      "key331": "truc7",
-      "key332": {
-        "key3321" : "truc",
-        "key3322" : "truc"
-      },
-      "key333": "truc8"
+    "course_58d1261255b19feb7ed8bf52": {
+        "page_58d1261355b19feb7ed8bf53": {
+            "article_58d1261355b19feb7ed8bf54": {
+                "block_58d1261355b19feb7ed8bf55": {
+                    "component_58d1261355b19feb7ed8bf57": {
+                        "properties": {
+                            "instruction": "",
+                            "scoreLabel": "Score",
+                            "waitingOnMediaText": "Options will appear here once the media has finished",
+                            "retryLastOptionLabel": "Rénitialiser la dernière option",
+                            "resetLabel": "Rénitialiser",
+                            "questionLabel": "Question",
+                            "youAnsweredWithLabel": "Vous avez répondu",
+                            "breakdownTitleLabel": "Breakdown of your answers",
+                            "_items": [
+                                {
+                                    "text": "test - J’ai appris que tu partais la semaine prochaine en mission en Afrique. Y-es-tu déjà allé ?",
+                                    "_media": {
+                                        "alt": ""
+                                    },
+                                    "_narrative": {
+                                        "title": "",
+                                        "body": ""
+                                    },
+                                    "_question": {
+                                        "stem": "<p>J&rsquo;ai appris que tu partais la semaine prochaine en mission en Afrique. Y-es-tu d&eacute;j&agrave; all&eacute; ? test</p>\n"
+                                    },
+                                    "_feedback": {
+                                        "text": ""
+                                    }
+                                },
+                                {
+                                    "text": "- Oui ma dernière mission remonte à quelques mois. ",
+                                    "_media": {
+                                        "alt": ""
+                                    },
+                                    "_narrative": {
+                                        "title": "",
+                                        "body": ""
+                                    },
+                                    "_question": {
+                                        "stem": "<p>Connais-tu la situation s&eacute;curitaire du moment ?</p>\n"
+                                    },
+                                    "_feedback": {
+                                        "text": ""
+                                    }
+                                },
+                                {
+                                    "text": "– Non c’est la première fois.",
+                                    "_media": {
+                                        "alt": ""
+                                    },
+                                    "_narrative": {
+                                        "title": "",
+                                        "body": ""
+                                    },
+                                    "_question": {
+                                        "stem": "<p>&ndash; Connais-tu la situation s&eacute;curitaire du moment ?</p>\n"
+                                    },
+                                    "_feedback": {
+                                        "text": ""
+                                    }
+                                },
+                                {
+                                    "text": "– Oui bien sûr. J’étais expatrié, les voyages ça me connait !",
+                                    "_media": {
+                                        "alt": ""
+                                    },
+                                    "_narrative": {
+                                        "title": "",
+                                        "body": ""
+                                    },
+                                    "_question": {
+                                        "stem": "<p>Connais-tu la situation s&eacute;curitaire du moment ?</p>\n"
+                                    },
+                                    "_feedback": {
+                                        "text": ""
+                                    }
+                                },
+                                {
+                                    "text": "– Oui puisque j’y étais il y a quelques mois. C’était très tranquille. Il n’y a pas de raison que cela change",
+                                    "_media": {
+                                        "alt": ""
+                                    },
+                                    "_narrative": {
+                                        "title": "",
+                                        "body": ""
+                                    },
+                                    "_question": {
+                                        "stem": ""
+                                    },
+                                    "_feedback": {
+                                        "text": "<p>La situation s&eacute;curitaire d&rsquo;un pays peut &eacute;voluer rapidement pour des raisons politiques, sociales, sanitaires ou climatiques.</p>\n\n<p>Il est imp&eacute;ratif de se renseigner sur ces points avant le d&eacute;part sur le portail s&ucirc;ret&eacute; VINCI.</p>\n\n<p>Il est disponible sur <a href=\"http://google.com\">vinci.net</a> / onglet Groupe / rubrique S&ucirc;ret&eacute;.</p>\n"
+                                    }
+                                },
+                                {
+                                    "text": "– Sais-tu auprès de qui je dois me renseigner ? ",
+                                    "_media": {
+                                        "alt": ""
+                                    },
+                                    "_narrative": {
+                                        "title": "",
+                                        "body": ""
+                                    },
+                                    "_question": {
+                                        "stem": ""
+                                    },
+                                    "_feedback": {
+                                        "text": "<p>La premi&egrave;re d&eacute;marche &agrave; r&eacute;aliser est de consulter le portail s&ucirc;ret&eacute; VINCI. Tu y trouveras tous les conseils n&eacute;cessaires &agrave; la bonne r&eacute;alisation de ta mission.</p>\n\n<p>Il est disponible sur vinci.net / onglet Groupe / rubrique S&ucirc;ret&eacute;.</p>\n"
+                                    }
+                                },
+                                {
+                                    "text": "– J’ai de l’expérience dans les voyages, c’est suffisant. ",
+                                    "_media": {
+                                        "alt": ""
+                                    },
+                                    "_narrative": {
+                                        "title": "",
+                                        "body": ""
+                                    },
+                                    "_question": {
+                                        "stem": ""
+                                    },
+                                    "_feedback": {
+                                        "text": "<p>C&rsquo;est justement parce que vous avez de l&rsquo;exp&eacute;rience que vous ne manquerez pas de vous renseigner au pr&eacute;alable sur situation s&eacute;curitaire du pays !</p>\n\n<p>Celle-ci peut &eacute;voluer rapidement pour des raisons politiques, sociales, sanitaires ou climatiques.</p>\n\n<p>Il est imp&eacute;ratif de se renseigner sur ces points avant le d&eacute;part sur le portail s&ucirc;ret&eacute; VINCI.</p>\n\n<p>Il est disponible sur vinci.net / onglet Groupe / rubrique S&ucirc;ret&eacute;.</p>\n"
+                                    }
+                                },
+                                {
+                                    "text": "– Oui puisque j’y étais il y a quelques mois. C’était très tranquille. Il n’y a pas de raison que cela change. ",
+                                    "_media": {
+                                        "alt": ""
+                                    },
+                                    "_narrative": {
+                                        "title": "",
+                                        "body": ""
+                                    },
+                                    "_question": {
+                                        "stem": ""
+                                    },
+                                    "_feedback": {
+                                        "text": "<p>La situation s&eacute;curitaire d&rsquo;un pays peut &eacute;voluer rapidement pour des raisons politiques, sociales, sanitaires ou climatiques.</p>\n\n<p>Il est imp&eacute;ratif de se renseigner sur ces points avant le d&eacute;part sur le portail s&ucirc;ret&eacute; VINCI.</p>\n\n<p>Il est disponible sur vinci.net / onglet Groupe / rubrique S&ucirc;ret&eacute;.</p>\n"
+                                    }
+                                },
+                                {
+                                    "text": "– Sais-tu auprès de qui je dois me renseigner ?",
+                                    "_media": {
+                                        "alt": ""
+                                    },
+                                    "_narrative": {
+                                        "title": "",
+                                        "body": ""
+                                    },
+                                    "_question": {
+                                        "stem": ""
+                                    },
+                                    "_feedback": {
+                                        "text": "<p>La premi&egrave;re d&eacute;marche &agrave; r&eacute;aliser est de consulter le portail s&ucirc;ret&eacute; VINCI. Tu y trouveras tous les conseils n&eacute;cessaires &agrave; la bonne r&eacute;alisation de ta mission.</p>\n\n<p>Il est disponible sur vinci.net / onglet Groupe / rubrique S&ucirc;ret&eacute;.</p>\n"
+                                    }
+                                },
+                                {
+                                    "text": "– J’ai de l’expérience dans les voyages, c’est suffisant.",
+                                    "_media": {
+                                        "alt": ""
+                                    },
+                                    "_narrative": {
+                                        "title": "",
+                                        "body": ""
+                                    },
+                                    "_question": {
+                                        "stem": ""
+                                    },
+                                    "_feedback": {
+                                        "text": "<p>C&rsquo;est justement parce que vous avez de l&rsquo;exp&eacute;rience que vous ne manquerez pas de vous renseigner au pr&eacute;alable sur situation s&eacute;curitaire du pays !</p>\n\n<p>Celle-ci peut &eacute;voluer rapidement pour des raisons politiques, sociales, sanitaires ou climatiques.</p>\n\n<p>Il est imp&eacute;ratif de se renseigner sur ces points avant le d&eacute;part sur le portail s&ucirc;ret&eacute; VINCI.</p>\n\n<p>Il est disponible sur vinci.net / onglet Groupe / rubrique S&ucirc;ret&eacute;.</p>\n"
+                                    }
+                                }
+                            ]
+                        },
+                        "body": "",
+                        "displayTitle": "Dans le bureau, une discussion s’engage avec un collègue de bureau",
+                        "title": "Component title"
+                    },
+                    "body": "",
+                    "displayTitle": "",
+                    "title": "Block title"
+                },
+                "block_58d1261355b19feb7ed8bf56": {
+                    "component_58d1261355b19feb7ed8bf58": {
+                        "properties": {
+                            "instruction": "",
+                            "_items": [
+                                {
+                                    "_options": [
+                                        {
+                                            "text": "facebook"
+                                        },
+                                        {
+                                            "text": "Inde"
+                                        },
+                                        {
+                                            "text": "Chine"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "_feedback": {
+                                "correct": "<p><strong>Si Facebook &eacute;tait un pays, sur la base de son nombre d&rsquo;utilisateurs, quelle serait sa place au classement mondial&nbsp;?&nbsp;</strong></p>",
+                                "_incorrect": {
+                                    "final": "<p><strong>Si Facebook &eacute;tait un pays, sur la base de son nombre d&rsquo;utilisateurs, quelle serait sa place au classement mondial&nbsp;?&nbsp;</strong></p>",
+                                    "notFinal": "<p><strong>Si Facebook &eacute;tait un pays, sur la base de son nombre d&rsquo;utilisateurs, quelle serait sa place au classement mondial&nbsp;?&nbsp;</strong></p>"
+                                },
+                                "_partlyCorrect": {
+                                    "final": "<p><strong>Si Facebook &eacute;tait un pays, sur la base de son nombre d&rsquo;utilisateurs, quelle serait sa place au classement mondial&nbsp;?&nbsp;</strong></p>",
+                                    "notFinal": "<p><strong>Si Facebook &eacute;tait un pays, sur la base de son nombre d&rsquo;utilisateurs, quelle serait sa place au classement mondial&nbsp;?&nbsp;</strong></p>"
+                                }
+                            },
+                            "_buttons": {
+                                "_submit": {
+                                    "buttonText": "",
+                                    "ariaLabel": ""
+                                },
+                                "_reset": {
+                                    "buttonText": "",
+                                    "ariaLabel": ""
+                                },
+                                "_showCorrectAnswer": {
+                                    "buttonText": "",
+                                    "ariaLabel": ""
+                                },
+                                "_hideCorrectAnswer": {
+                                    "buttonText": "",
+                                    "ariaLabel": ""
+                                },
+                                "_showFeedback": {
+                                    "buttonText": "",
+                                    "ariaLabel": ""
+                                },
+                                "remainingAttemptsText": "",
+                                "remainingAttemptText": ""
+                            }
+                        },
+                        "body": "<p><strong>Si Facebook &eacute;tait un pays, sur la base de son nombre d&rsquo;utilisateurs, quelle serait sa place au classement mondial&nbsp;?&nbsp;</strong></p>",
+                        "displayTitle": "Component title",
+                        "title": "Component title"
+                    },
+                    "body": "",
+                    "displayTitle": "",
+                    "title": "Block title"
+                },
+                "body": "",
+                "displayTitle": "Article title",
+                "title": "Article title"
+            },
+            "duration": "",
+            "linkText": "View",
+            "_lockType": "",
+            "body": "",
+            "displayTitle": "Page title",
+            "title": "Page title"
+        },
+        "_globals": {
+            "_accessibility": {
+                "_accessibilityToggleTextOn": "Turn accessibility on?",
+                "_accessibilityToggleTextOff": "Turn accessibility off?",
+                "_accessibilityInstructions": {
+                    "touch": "Usage instructions. Use swipe left for next. Use swipe right for previous. Use a double tab to select. Use a two finger slide up to go to the top of the page.",
+                    "notouch": "Usage instructions. Use tab for next. Use shift tab for previous. Use enter to select. Use escape to go to the top of the page.",
+                    "ipad": "Usage instructions for touchscreens. Use swipe left for next. Use swipe right for previous. Use a double tab to select. Use a two finger slide up to go to the top of the page. Usage instructions for keyboard access. Use left for next. Use right for previous. Use up and down together to select."
+                },
+                "_ariaLabels": {
+                    "navigation": "Course navigation bar",
+                    "menuLoaded": "Menu loaded",
+                    "menu": "Menu",
+                    "menuItem": "Menu item",
+                    "menuViewButton": "Select here to enter",
+                    "page": "Page",
+                    "pageLoaded": "Page loaded",
+                    "previous": "Back",
+                    "navigationBack": "Navigate back",
+                    "navigationDrawer": "Open course resources and search",
+                    "closeResources": "Close resources",
+                    "drawerBack": "Back to drawer",
+                    "drawer": "Side drawer",
+                    "closePopup": "Close popup",
+                    "next": "Next",
+                    "done": "Done",
+                    "complete": "Complete",
+                    "incomplete": "Incomplete",
+                    "correct": "Correct",
+                    "locked": "Locked",
+                    "accessibilityToggleButton": "By selecting this button you can set whether accessibility is turned on or off",
+                    "feedbackPopUp": "Popup opened",
+                    "visited": "Visited",
+                    "menuBack": "Back to menu",
+                    "menuIndicatorHeading": "Menu item heading "
+                }
+            },
+            "_components": {
+                "_text": {
+                    "ariaRegion": ""
+                },
+                "_hotgraphic": {
+                    "ariaRegion": "Below is a component which allows you to select hot spots over an image. Select a hot spot to trigger a popup that includes an image with display text. Select the close button to close the popup."
+                },
+                "_media": {
+                    "ariaRegion": "This is a media component which plays a video. Select the play / pause button to watch or listen.",
+                    "transcriptButton": "Alternatively you can select the link below for the transcript."
+                },
+                "_branching": {
+                    "ariaRegion": "This component is a branching component typically used to explore outcomes in various scenarios."
+                }
+            }
+        },
+        "_start": {},
+        "_buttons": {
+            "disabledAriaLabel": "This button is disabled at the moment",
+            "remainingAttemptText": "final attempt",
+            "remainingAttemptsText": "remaining attempts",
+            "_showFeedback": {
+                "ariaLabel": "Show feedback",
+                "buttonText": "Show feedback"
+            },
+            "_hideCorrectAnswer": {
+                "ariaLabel": "Hide correct answer",
+                "buttonText": "Hide correct answer"
+            },
+            "_showCorrectAnswer": {
+                "ariaLabel": "Show correct answer",
+                "buttonText": "Show correct answer"
+            },
+            "_reset": {
+                "ariaLabel": "Reset",
+                "buttonText": "Reset"
+            },
+            "_submit": {
+                "ariaLabel": "Submit",
+                "buttonText": "Submit"
+            }
+        },
+        "description": "",
+        "body": "",
+        "displayTitle": "Test - Branching save issue (FR)",
+        "title": "Test - Branching save issue (FR)"
     }
-  },
-  "key4": "truc2",
-  "key5": "truc2",
-  "key6": "truc2",
-  "key7": "truc7",
-  "key8": {
-    "key81" : "truc",
-    "key82" : "truc"
-  }
 }
