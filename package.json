@@ -13,6 +13,7 @@
     "debug": "^2.6.3",
     "fs-extra": "^2.1.2",
     "html-entities": "^1.2.0",
+    "html-to-text": "^3.2.0",
     "lodash": "^4.17.4",
     "lodash-deep": "^2.0.0",
     "msexcel-builder": "0.0.2",
