@@ -15,6 +15,9 @@
     "html-entities": "^1.2.0",
     "lodash": "^4.17.4",
     "lodash-deep": "^2.0.0",
-    "msexcel-builder": "0.0.2"
+    "msexcel-builder": "0.0.2",
+    "nested-property": "0.0.7",
+    "set-value": "^0.4.3",
+    "xlsx": "^0.9.7"
   }
 }
