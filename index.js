@@ -61,9 +61,9 @@ _.each(paths, function(value, key) {
   let rows = key + 3
 
   let goodPaths = paths[key]
-  // if(!/([0-9]*)\./g.test(goodPaths)) {
-  //   goodPaths = '0.' + goodPaths
-  // }
+  if(!/([0-9]*)\./g.test(goodPaths)) {
+    goodPaths = '0.' + goodPaths
+  }
   // goodPaths = paths[key].replace(/^([0-9]*)\./g, '[$1].')
   // goodPaths = goodPaths.replace(/\.([0-9]*)\./g, '[$1].')
   // goodPaths = goodPaths.replace(/(\.([0-9]))/g, '.[$2]')
