@@ -9,6 +9,8 @@ const green = chalk.green
 // const grey = chalk.grey
 // const blue = chalk.blue
 const excelbuilder = require('msexcel-builder')
+
+var log = require('single-line-log').stdout;
 // const checkFileExistsSync = require('./tools/checkFileExistsSync')
 
 _.mixin(require('lodash-deep'))
@@ -76,7 +78,7 @@ fs.readdir(folder, (err, files) => {
       let test = regex.test(goodPaths)
 
       if (test && toTranslate[key] !== '') {
-        console.log(green(test + ' ' + goodPaths))
+        log(green(test + ' ' + goodPaths))
 
         if (toTranslate[key] === null) {
           toTranslate[key] = 'null'
@@ -88,13 +90,12 @@ fs.readdir(folder, (err, files) => {
         sheet1.set(4, rows - resetRow, htmlToText.fromString(Entities.decode(toTranslate[key].toString())))
       } else {
         try {
-          console.log(red(test + ' ' + goodPaths + ' : ' + Entities.decode(toTranslate[key].toString())))
+          log(red(test + ' ' + goodPaths + ' : ' + Entities.decode(toTranslate[key].toString())))
         } catch (e) {
-          console.log(red(test))
+          log(red(test))
         }
         resetRow++
       }
-
       // witness++;
     })
 
@@ -102,7 +103,7 @@ fs.readdir(folder, (err, files) => {
     workbook.save(function (err) {
       if (err) throw err
       else {
-        console.log(green(fileBasename) + '.xlsx was created')
+        console.log(green(fileBasename + '.xlsx') +' was created')
       }
     })
   })
