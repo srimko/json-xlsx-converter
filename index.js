@@ -30,8 +30,11 @@ fs.readdir(folder, (err, files) => {
   if (err) throw err
 
   files = _.filter(files, function(file) {
-    if(file !== '.DS_Store')
-    return file;
+    if(/(.json)/.test(file)){
+      return file
+    } else {
+      return false
+    }
   });
 
   files.forEach(file => {
