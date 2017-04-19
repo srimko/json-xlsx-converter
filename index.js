@@ -24,7 +24,6 @@ if(process.argv[2] !== undefined) {
   folder = './json'
 }
 
-console.log(folder)
 fs.readdir(folder, (err, files) => {
   if (err) throw err
 
