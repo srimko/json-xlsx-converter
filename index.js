@@ -29,6 +29,11 @@ if(process.argv[2] !== undefined) {
 fs.readdir(folder, (err, files) => {
   if (err) throw err
 
+  files = _.filter(files, function(file) {
+    if(file !== '.DS_Store')
+    return file;
+  });
+
   files.forEach(file => {
     let fileBasename = path.basename(file, '.json')
 
