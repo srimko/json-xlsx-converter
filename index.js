@@ -1,47 +1,55 @@
 const fs = require('fs-extra')
-const Entities = require('html-entities').AllHtmlEntities;
+const Entities = require('html-entities').AllHtmlEntities
 const _ = require('lodash')
 const path = require('path')
-
 const htmlToText = require('html-to-text')
-
 const chalk = require('chalk')
 const red = chalk.red
 const green = chalk.green
-const grey = chalk.grey
-const blue = chalk.blue
+// const grey = chalk.grey
+// const blue = chalk.blue
+const excelbuilder = require('msexcel-builder')
+// const checkFileExistsSync = require('./tools/checkFileExistsSync')
 
-const excelbuilder = require('msexcel-builder');
+_.mixin(require('lodash-deep'))
 
-const checkFileExistsSync = require('./tools/checkFileExistsSync')
+let folder
+if(process.argv[2] !== undefined) {
+  folder = process.argv[2]
+  if(!fs.existsSync(folder)) {
+    console.log(red("The folder doesn\'t exist."))
+    process.exit()
+  }
+} else {
+  folder = './json'
+}
 
-_.mixin(require("lodash-deep"));
+console.log(folder)
+fs.readdir(folder, (err, files) => {
+  if (err) throw err
 
-fs.readdir('./json', (err, files) => {
   files.forEach(file => {
-    fileBasename = path.basename(file, '.json')
-    let jsonFile = fs.readJsonSync(__dirname + '/json/' + fileBasename + '.json' )
-    let jsonConf = fs.readJsonSync(__dirname + '/config/' + fileBasename + '.conf' )
+    let fileBasename = path.basename(file, '.json')
+
+    let jsonFile = fs.readJsonSync(__dirname + '/json/' + fileBasename + '.json')
+    let jsonConf = fs.readJsonSync(__dirname + '/config/' + fileBasename + '.conf')
 
     // Make filter
     let reg = jsonConf.exception.join('|')
-    var regex = new RegExp(reg);
-
-    console.log(regex)
+    var regex = new RegExp(reg)
 
     let paths = []
     let tags = []
     let toTranslate = []
 
-    _.deepMapValues(jsonFile, function(value, path){
+    _.deepMapValues(jsonFile, function (value, path) {
       paths.push(path)
       tags.push(value)
       toTranslate.push(value)
-    });
+    })
 
     let workbook = excelbuilder.createWorkbook('./xlsx', fileBasename + '.xlsx')
-
-    let sheet1 = workbook.createSheet('sheet1', 4, paths.length + 2);
+    let sheet1 = workbook.createSheet('sheet1', 4, paths.length + 2)
 
     // Fill some data
     sheet1.set(1, 1, 'Reference')
@@ -55,25 +63,23 @@ fs.readdir('./json', (err, files) => {
 
     let resetRow = 1
     // let witness = 0;
-    _.each(paths, function(value, key) {
+    _.each(paths, function (value, key) {
       let rows = key + 3
 
       let goodPaths = paths[key]
-      if(!/([0-9]*)\./g.test(goodPaths)) {
+      if (!/([0-9]*)\./g.test(goodPaths)) {
         goodPaths = '0.' + goodPaths
       }
       // goodPaths = paths[key].replace(/^([0-9]*)\./g, '[$1].')
       // goodPaths = goodPaths.replace(/\.([0-9]*)\./g, '[$1].')
       // goodPaths = goodPaths.replace(/(\.([0-9]))/g, '.[$2]')
 
-
       let test = regex.test(goodPaths)
 
-      console.log(red(test), green(toTranslate[key] !== ""), goodPaths)
-      if(test && toTranslate[key] !== "") {
-        // console.log(green(test + ' ' + goodPaths))
+      if (test && toTranslate[key] !== '') {
+        console.log(green(test + ' ' + goodPaths))
 
-        if(toTranslate[key] === null) {
+        if (toTranslate[key] === null) {
           toTranslate[key] = 'null'
         }
 
@@ -81,22 +87,24 @@ fs.readdir('./json', (err, files) => {
         sheet1.set(2, rows - resetRow, Entities.decode(toTranslate[key].toString()))
         sheet1.set(3, rows - resetRow, Entities.decode(toTranslate[key].toString()))
         sheet1.set(4, rows - resetRow, htmlToText.fromString(Entities.decode(toTranslate[key].toString())))
-
       } else {
-        // console.log(red(test + ' ' + goodPaths + ' : ' + Entities.decode(toTranslate[key].toString())))
+        try {
+          console.log(red(test + ' ' + goodPaths + ' : ' + Entities.decode(toTranslate[key].toString())))
+        } catch (e) {
+          console.log(red(test))
+        }
         resetRow++
       }
+
       // witness++;
     })
 
-
     //  Save it
-     workbook.save(function(err){
-       if (err)
-         throw err;
-       else
-         console.log('congratulations, your workbook created');
-     });
-
-  });
+    workbook.save(function (err) {
+      if (err) throw err
+      else {
+        console.log(green(fileBasename) + '.xlsx was created')
+      }
+    })
+  })
 })
