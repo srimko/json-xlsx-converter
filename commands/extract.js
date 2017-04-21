@@ -22,20 +22,14 @@ function extract (folder) {
     folder = 'source'
   }
 
-  fs.readdir(folder, (err, files) => {
-    if (err) throw err
+  let workbook = excelbuilder.createWorkbook('xlsx/xlsxOri/', 'extract.xlsx')
 
-    files = _.filter(files, function(file) {
-      if(/(.json)/.test(file)){
-        return file
-      } else {
-        return false
-      }
-    })
+  let files = fs.readdirSync(folder)
 
-    files.forEach(file => {
+  _.each(files, (file, key) => {
+    if(/(.json)/.test(file)){
       let fileBasename = path.basename(file, '.json')
-      //
+
       let jsonFile = fs.readJsonSync(__dirname + '/../source/' + fileBasename + '.json')
       fs.writeJSONSync(__dirname + '/../json/jsonOri/' + fileBasename + '.json', {})
       let jsonFileCopy = fs.readJsonSync(__dirname + '/../json/jsonOri/' + fileBasename + '.json')
@@ -59,18 +53,17 @@ function extract (folder) {
         toTranslate.push(value)
       })
 
-      let workbook = excelbuilder.createWorkbook('xlsx/xlsxOri/', fileBasename + '.xlsx')
-      let sheet1 = workbook.createSheet('sheet1', 4, paths.length + 2)
+      let sheet = workbook.createSheet(fileBasename, 4, paths.length + 2)
 
       // Fill some data
-      sheet1.set(1, 1, 'Reference')
-      sheet1.width(1, 25)
-      sheet1.set(2, 1, 'Source')
-      sheet1.width(2, 70)
-      sheet1.set(3, 1, 'Target')
-      sheet1.width(3, 70)
-      sheet1.set(4, 1, 'Clean')
-      sheet1.width(4, 70)
+      sheet.set(1, 1, 'Reference')
+      sheet.width(1, 25)
+      sheet.set(2, 1, 'Source')
+      sheet.width(2, 70)
+      sheet.set(3, 1, 'Target')
+      sheet.width(3, 70)
+      sheet.set(4, 1, 'Clean')
+      sheet.width(4, 70)
 
       let resetRow = 1
       // let witness = 0;
@@ -94,10 +87,10 @@ function extract (folder) {
             toTranslate[key] = 'null'
           }
 
-          sheet1.set(1, rows - resetRow, goodPaths)
-          sheet1.set(2, rows - resetRow, Entities.decode(toTranslate[key].toString()))
-          sheet1.set(3, rows - resetRow, Entities.decode(toTranslate[key].toString()))
-          sheet1.set(4, rows - resetRow, htmlToText.fromString(Entities.decode(toTranslate[key].toString())))
+          sheet.set(1, rows - resetRow, goodPaths)
+          sheet.set(2, rows - resetRow, Entities.decode(toTranslate[key].toString()))
+          sheet.set(3, rows - resetRow, Entities.decode(toTranslate[key].toString()))
+          sheet.set(4, rows - resetRow, htmlToText.fromString(Entities.decode(toTranslate[key].toString())))
         } else {
           try {
             log(red(test + ' ' + goodPaths + ' : ' + Entities.decode(toTranslate[key].toString())))
@@ -108,15 +101,15 @@ function extract (folder) {
         }
         // witness++;
       })
+    }
+  })
 
-      //  Save it
-      workbook.save(function (err) {
-        if (err) throw err
-        else {
-          console.log(green(fileBasename + '.xlsx') +' was created')
-        }
-      })
-    })
+  //  Save it
+  workbook.save(function (err) {
+    if (err) throw err
+    else {
+      console.log(green(fileBasename + '.xlsx') +' was created')
+    }
   })
 }
 
