@@ -16,7 +16,7 @@ function populate (language) {
     let file = fs.readdirSync(traductionFolder)
 
     if(file.length === 0) {
-      console.log(red('No trad file inside xlsxTrad foler. Please insert a excel file.'))
+      console.log(red('No such traduction file inside xlsxTrad foler. Please insert a excel file.'))
       process.exit()
     } else {
       file = file[0]
@@ -24,6 +24,7 @@ function populate (language) {
       const sheetNameList = workbook.SheetNames
 
       _.each(sheetNameList, function(JSONsheet, key) {
+        console.time('populate-' + JSONsheet)
         let JSONsheetdata = XLSX.utils.sheet_to_json(workbook.Sheets[JSONsheet])
 
         let JSONfile = fs.readJsonSync(JSONFolderOri + '/' + JSONsheet + '.json', 'UTF-8')
@@ -35,6 +36,7 @@ function populate (language) {
         fs.copySync(JSONFolderOri + '/' + JSONsheet + '.json', JSONFolder + '/' + JSONsheet + '.json')
 
         fs.writeJSONSync(JSONFolder + '/' + JSONsheet + '.json', JSONfile)
+        console.timeEnd('populate-' + JSONsheet)
       })
     }
   } catch (e) {
