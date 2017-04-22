@@ -17,6 +17,14 @@ function checkParameters (params) {
       "command": 'extract',
       "folder": params[1],
     }
+  } else if ((_.indexOf(params, '-populate') !== -1) || (_.indexOf(params, '-p') !== -1)) {
+    if (params[1] === undefined) {
+      params[1] = ''
+    }
+    return {
+      "command": 'populate',
+      "language": params[1],
+    }
   }
 }
 

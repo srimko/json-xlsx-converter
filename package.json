@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "init": "node index.js -init",
-    "extract": "node index.js -extract"
+    "extract": "node index.js -extract",
+    "populate": "node index.js -populate en"
   },
   "author": "srimko",
   "license": "ISC",

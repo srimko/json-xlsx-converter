@@ -12,11 +12,17 @@ Pour lancer l'extraction des fichiers json du cours lancer la commande `node ind
 
 Le `<folder>` est optionel, si il n'est pas resseigné le fichier source sera prit comme répertoire de travail.
 
+Pour lancer la population des nouveaux fichiers json il faut lancer la commande `node index.js -populate <language>` ou `node index.js -p <language>`.
+
+La langue est impérative pour le bon fonctionnement du script.
+
 ## Commande
 
 `npm run init` équivaut à faire `node index.js -init`
 
 `npm run start` équivaut à faire `node index.js -extract`
+
+`npm run populate` équivaut à faire `node index.js -populate en`
 
 
 # JSON XLSX CONVERTER V1.2.0

@@ -14,6 +14,7 @@ var log = require('single-line-log').stdout;
 // const checkFileExistsSync = require('./tools/checkFileExistsSync')
 const init = require('./commands/init')
 const extract = require('./commands/extract')
+const populate = require('./commands/populate')
 const checkParameters = require('./tools/checkParameters')
 
 let functionToExecute = checkParameters(process.argv)
@@ -26,6 +27,9 @@ switch (functionToExecute.command) {
     break;
   case 'extract':
     extract(functionToExecute.folder)
+    break;
+  case 'populate':
+    populate(functionToExecute.language)
     break;
   default:
     console.log('Bad commands')
