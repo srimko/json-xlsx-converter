@@ -27,6 +27,7 @@ function extract (folder) {
   let files = fs.readdirSync(folder)
 
   _.each(files, (file, key) => {
+    console.time('extract')
     if(/(.json)/.test(file)){
       let fileBasename = path.basename(file, '.json')
 
@@ -66,7 +67,6 @@ function extract (folder) {
       sheet.width(4, 70)
 
       let resetRow = 1
-      // let witness = 0;
       _.each(paths, function (value, key) {
         let rows = key + 3
 
@@ -81,7 +81,7 @@ function extract (folder) {
         let test = regex.test(goodPaths)
 
         if (test && toTranslate[key] !== '') {
-          log(green(test + ' ' + goodPaths))
+          log(green(fileBasename + ' : ' + goodPaths))
 
           if (toTranslate[key] === null) {
             toTranslate[key] = 'null'
@@ -93,13 +93,12 @@ function extract (folder) {
           sheet.set(4, rows - resetRow, htmlToText.fromString(Entities.decode(toTranslate[key].toString())))
         } else {
           try {
-            log(red(test + ' ' + goodPaths + ' : ' + Entities.decode(toTranslate[key].toString())))
+            log(red(fileBasename + ' : ' + goodPaths))
           } catch (e) {
             log(red(test))
           }
           resetRow++
         }
-        // witness++;
       })
     }
   })
@@ -108,7 +107,8 @@ function extract (folder) {
   workbook.save(function (err) {
     if (err) throw err
     else {
-      console.log(green(fileBasename + '.xlsx') +' was created')
+      console.log(green('extract.xlsx') +' was created')
+      console.timeEnd('extract')
     }
   })
 }
