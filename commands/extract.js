@@ -81,7 +81,7 @@ function extract (folder) {
         let test = regex.test(goodPaths)
 
         if (test && toTranslate[key] !== '') {
-          log(green(fileBasename + ' : ' + goodPaths))
+          // log(green(fileBasename + ' : ' + goodPaths))
 
           if (toTranslate[key] === null) {
             toTranslate[key] = 'null'
@@ -93,9 +93,9 @@ function extract (folder) {
           sheet.set(4, rows - resetRow, htmlToText.fromString(Entities.decode(toTranslate[key].toString())))
         } else {
           try {
-            log(red(fileBasename + ' : ' + goodPaths))
+            // log(red(fileBasename + ' : ' + goodPaths))
           } catch (e) {
-            log(red(test))
+            // log(red(test))
           }
           resetRow++
         }
