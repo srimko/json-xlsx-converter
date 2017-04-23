@@ -8,6 +8,7 @@ const blue = chalk.blue
 function init () {
   let folderJSON = 'json'
   let folderXLSX = 'xlsx'
+  let folderSource = 'souce'
 
   if(!fs.existsSync(folderJSON)) {
     console.log(green(folderJSON + ' has been created'))
@@ -38,6 +39,11 @@ function init () {
     console.log(green(folderXLSX + '/' + 'xlsxTrad'))
   } else {
     console.log(folderXLSX + ' already exist')
+  }
+  if(!fs.existsSync(folderSource)) {
+    fs.mkdirSync(folderSource)
+  } else {
+    console.log(folderSource + ' already exist')
   }
 }
 
