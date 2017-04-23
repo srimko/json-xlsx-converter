@@ -10,35 +10,50 @@ const blue = chalk.blue
 const Entities = require('html-entities').AllHtmlEntities
 const htmlToText = require('html-to-text')
 const excelbuilder = require('msexcel-builder')
-var log = require('single-line-log').stdout;
+
+const prompt = require('prompt')
+const log = require('single-line-log').stdout;
+const inquirer = require('inquirer')
 
 function extract (folder) {
-  if(folder !== '') {
-    if(!fs.existsSync(folder)) {
-      console.log(red('The ' + folder + ' folder doesn\'t exist.'))
-      process.exit()
+  let folderTranslation = 'translation'
+  let workFolder
+  let workFolderJSON
+  let workFolderXLSX
+
+  // console.log(path.join(folderTranslation, folder))
+  // let projects = fs.readdirSync(path.join(folderTranslation))
+
+  let folders = fs.readdirSync(folderTranslation)
+  folders = _.filter(folders, function(folder) {
+    if(!/(.DS_Store)/.test(folder)){
+      return true
     }
-  } else {
-    folder = 'source'
-  }
+  })
 
-  let workbook = excelbuilder.createWorkbook('xlsx/xlsxOri/', 'extract.xlsx')
+  inquirer.prompt({
+    type: 'list',
+    name: 'folder',
+    message: 'What do you want to extract?',
+    choices: folders
+  }).then(function (answers) {
+    workFolder = path.join(folderTranslation, answers.folder)
+    workFolderJSON = path.join(workFolder, 'json', 'jsonOri')
+    workFolderXLSX = path.join(workFolder, 'xlsx', 'xlsxOri')
+    confFolder = path.join(__dirname, '..', 'config')
+    // console.log(JSON.stringify(answers, null, '  '));
 
-  let files = fs.readdirSync(folder)
+    let files = fs.readdirSync(workFolderJSON)
 
-  _.each(files, (file, key) => {
-    console.time('extract')
-    if(/(.json)/.test(file)){
+    let workbook = excelbuilder.createWorkbook(workFolderXLSX, 'extract.xlsx')
+
+    _.each(files, function(file, key) {
+      console.time('extract')
       let fileBasename = path.basename(file, '.json')
+      let jsonFile = path.join(workFolderJSON, file)
+      let jsonConf = path.join(confFolder, fileBasename + '.conf')
 
-      let jsonFile = fs.readJsonSync(__dirname + '/../source/' + fileBasename + '.json')
-      fs.writeJSONSync(__dirname + '/../json/jsonOri/' + fileBasename + '.json', {})
-      let jsonFileCopy = fs.readJsonSync(__dirname + '/../json/jsonOri/' + fileBasename + '.json')
-
-      let jsonConf = fs.readJsonSync(__dirname + '/../config/' + fileBasename + '.conf')
-
-      // Copy
-      fs.copySync(__dirname + '/../source/' + fileBasename + '.json', __dirname + '/../json/jsonOri/' + fileBasename + '.json')
+      jsonConf = fs.readJsonSync(jsonConf)
 
       // Make filter
       let reg = jsonConf.exception.join('|')
@@ -100,17 +115,18 @@ function extract (folder) {
           resetRow++
         }
       })
-    }
-  })
+    })
 
-  //  Save it
-  workbook.save(function (err) {
-    if (err) throw err
-    else {
-      console.log(green('extract.xlsx') +' was created')
-      console.timeEnd('extract')
-    }
-  })
+    //  Save it
+    workbook.save(function (err) {
+      if (err) throw err
+      else {
+        console.log(green('extract.xlsx') +' was created')
+        console.timeEnd('extract')
+      }
+    })
+
+  });
 }
 
 module.exports = extract
