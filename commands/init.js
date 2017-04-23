@@ -1,49 +1,61 @@
-const fs = require('fs')
+const fs = require('fs-extra')
 const chalk = require('chalk')
 const red = chalk.red
 const green = chalk.green
 const grey = chalk.grey
 const blue = chalk.blue
+const path = require('path')
+const _ = require('lodash')
 
-function init () {
+function init (projectFolder, projectPath) {
+  let folderTranslation = 'translation'
+  let folderDefault = 'default'
   let folderJSON = 'json'
   let folderXLSX = 'xlsx'
-  let folderSource = 'souce'
 
-  if(!fs.existsSync(folderJSON)) {
-    console.log(green(folderJSON + ' has been created'))
-    fs.mkdirSync(folderJSON)
-    fs.mkdirSync(folderJSON + '/' + 'jsonOri')
-    fs.mkdirSync(folderJSON + '/' + 'jsonTrad')
-    fs.mkdirSync(folderJSON + '/' + 'jsonTrad/fr')
-    fs.mkdirSync(folderJSON + '/' + 'jsonTrad/en')
-    fs.mkdirSync(folderJSON + '/' + 'jsonTrad/es')
-    fs.mkdirSync(folderJSON + '/' + 'jsonTrad/de')
-    console.log(green(folderJSON + '/' + 'jsonOri'))
-    console.log(green(folderJSON + '/' + 'jsonTrad'))
-
-  } else {
-    console.log(folderJSON + ' already exist')
+  // Crating folder translation
+  if(!fs.existsSync(folderTranslation)) {
+    console.log(green('Folder ' + folderTranslation + ' was created...'))
+    fs.mkdirSync(folderTranslation)
   }
 
-  if(!fs.existsSync(folderXLSX)) {
-    fs.mkdirSync(folderXLSX)
-    fs.mkdirSync(folderXLSX + '/' + 'xlsxOri')
-    fs.mkdirSync(folderXLSX + '/' + 'xlsxTrad')
-    fs.mkdirSync(folderXLSX + '/' + 'xlsxTrad/fr')
-    fs.mkdirSync(folderXLSX + '/' + 'xlsxTrad/en')
-    fs.mkdirSync(folderXLSX + '/' + 'xlsxTrad/es')
-    fs.mkdirSync(folderXLSX + '/' + 'xlsxTrad/de')
-    console.log(green(folderXLSX + ' has been created'))
-    console.log(green(folderXLSX + '/' + 'xlsxOri'))
-    console.log(green(folderXLSX + '/' + 'xlsxTrad'))
-  } else {
-    console.log(folderXLSX + ' already exist')
+  // We create projectFolder into translation folder
+  let pathFolder = path.join(folderTranslation, projectFolder)
+  if(!fs.existsSync(pathFolder)) {
+    console.log(green('Folder ' + pathFolder + ' was created...'))
+    fs.mkdirSync(pathFolder)
+
+    // Json folder work
+    fs.mkdirSync(path.join(pathFolder, folderJSON))
+    fs.mkdirSync(path.join(pathFolder, folderJSON, 'jsonOri'))
+    fs.mkdirSync(path.join(pathFolder, folderJSON, 'jsonTrad'))
+    fs.mkdirSync(path.join(pathFolder, folderJSON, 'jsonTrad', 'fr'))
+    fs.mkdirSync(path.join(pathFolder, folderJSON, 'jsonTrad', 'en'))
+    fs.mkdirSync(path.join(pathFolder, folderJSON, 'jsonTrad', 'es'))
+    fs.mkdirSync(path.join(pathFolder, folderJSON, 'jsonTrad', 'de'))
+
+    // XLSX folder work
+    fs.mkdirSync(path.join(pathFolder, folderXLSX))
+    fs.mkdirSync(path.join(pathFolder, folderXLSX, 'xlsxOri'))
+    fs.mkdirSync(path.join(pathFolder, folderXLSX, 'xlsxTrad'))
+    fs.mkdirSync(path.join(pathFolder, folderXLSX, 'xlsxTrad', 'fr'))
+    fs.mkdirSync(path.join(pathFolder, folderXLSX, 'xlsxTrad', 'en'))
+    fs.mkdirSync(path.join(pathFolder, folderXLSX, 'xlsxTrad', 'es'))
+    fs.mkdirSync(path.join(pathFolder, folderXLSX, 'xlsxTrad', 'de'))
   }
-  if(!fs.existsSync(folderSource)) {
-    fs.mkdirSync(folderSource)
+
+  if(projectFolder === 'default') {
+    console.log('Don\'t forget to copy your json files ')
   } else {
-    console.log(folderSource + ' already exist')
+    let files = fs.readdirSync(projectPath)
+
+    _.each(files, (file, key) => {
+      if(/(.json)/.test(file)){
+        let pathTofile = path.join(projectPath, file)
+        let pathToTranslateFile = path.join(pathFolder, folderJSON, 'jsonOri', file)
+        fs.copySync(pathTofile, pathToTranslateFile)
+      }
+    })
   }
 }
 

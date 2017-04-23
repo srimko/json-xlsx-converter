@@ -1,17 +1,31 @@
 const fs = require('fs')
 const _ = require('lodash')
+const path = require('path')
 
 function checkParameters (params) {
   params = params.slice(2)
 
   if ((_.indexOf(params, '-init') !== -1) || (_.indexOf(params, '-i') !== -1)) {
+    let folder
+    if (params[1] === undefined) {
+      folder = 'default'
+    } else {
+      let pathSplited = params[1].split('/')
+      _.each(pathSplited, function(value, key) {
+        if(pathSplited[key + 1] === 'src') {
+          folder = pathSplited[key]
+        }
+      })
+    }
+
     return {
       "command": 'init',
-      "param": '',
+      "folder": folder,
+      "path": params[1]
     }
   } else if ((_.indexOf(params, '-extract') !== -1) || (_.indexOf(params, '-e') !== -1)) {
     if (params[1] === undefined) {
-      params[1] = ''
+      params[1] = 'default'
     }
     return {
       "command": 'extract',

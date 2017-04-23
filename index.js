@@ -23,7 +23,7 @@ _.mixin(require('lodash-deep'))
 
 switch (functionToExecute.command) {
   case 'init':
-    init()
+    init(functionToExecute.folder, functionToExecute.path)
     break;
   case 'extract':
     extract(functionToExecute.folder)
