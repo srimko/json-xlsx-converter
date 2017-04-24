@@ -21,9 +21,6 @@ function extract (folder) {
   let workFolderJSON
   let workFolderXLSX
 
-  // console.log(path.join(folderTranslation, folder))
-  // let projects = fs.readdirSync(path.join(folderTranslation))
-
   let folders = fs.readdirSync(folderTranslation)
   folders = _.filter(folders, function(folder) {
     if(!/(.DS_Store)/.test(folder)){
