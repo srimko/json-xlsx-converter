@@ -4,6 +4,8 @@
 
 Cloner le rep `git clone *****`
 
+Aller dans le rep `cd json-xlsx-converter`
+
 Lancer la commande `npm install`
 
 Ensuite la commande `node index.js -init` ou `node index.js -i`, cette commande va créer tous les dossiers et fichiers nécessaire au fonctionnement du script.
