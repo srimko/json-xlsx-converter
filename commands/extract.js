@@ -11,7 +11,6 @@ const Entities = require('html-entities').AllHtmlEntities
 const htmlToText = require('html-to-text')
 const excelbuilder = require('msexcel-builder')
 
-const prompt = require('prompt')
 const log = require('single-line-log').stdout;
 const inquirer = require('inquirer')
 
