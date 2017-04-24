@@ -34,7 +34,7 @@ function extract (folder) {
     message: 'What do you want to extract?',
     choices: folders
   }).then(function (answers) {
-    workFolder = path.join(folderTranslation, answers.folder)
+    workFolder = path.join(__dirname, '..', folderTranslation, answers.folder)
     workFolderJSON = path.join(workFolder, 'json', 'jsonOri')
     workFolderXLSX = path.join(workFolder, 'xlsx', 'xlsxOri')
     confFolder = path.join(__dirname, '..', 'config')
@@ -60,6 +60,7 @@ function extract (folder) {
       let tags = []
       let toTranslate = []
 
+      jsonFile = fs.readJsonSync(jsonFile)
       _.deepMapValues(jsonFile, function (value, path) {
         paths.push(path)
         tags.push(value)
