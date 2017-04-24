@@ -1,4 +1,4 @@
-# JSON XLSX CONVERTER V2.0.0 (En développement)
+# JSON XLSX CONVERTER V2.1.0
 
 ## Fonctionnement
 
