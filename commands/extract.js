@@ -2,16 +2,16 @@ const fs = require('fs-extra')
 const _ = require('lodash')
 const path = require('path')
 const chalk = require('chalk')
-const red = chalk.red
+// const red = chalk.red
 const green = chalk.green
-const grey = chalk.grey
-const blue = chalk.blue
+// const grey = chalk.grey
+// const blue = chalk.blue
 
 const Entities = require('html-entities').AllHtmlEntities
 const htmlToText = require('html-to-text')
 const excelbuilder = require('msexcel-builder')
 
-const log = require('single-line-log').stdout;
+// const log = require('single-line-log').stdout
 const inquirer = require('inquirer')
 
 function extract (folder) {
@@ -21,8 +21,8 @@ function extract (folder) {
   let workFolderXLSX
 
   let folders = fs.readdirSync(folderTranslation)
-  folders = _.filter(folders, function(folder) {
-    if(!/(.DS_Store)/.test(folder)){
+  folders = _.filter(folders, function (folder) {
+    if (!/(.DS_Store)/.test(folder)) {
       return true
     }
   })
@@ -36,14 +36,14 @@ function extract (folder) {
     workFolder = path.join(__dirname, '..', folderTranslation, answers.folder)
     workFolderJSON = path.join(workFolder, 'json', 'jsonOri')
     workFolderXLSX = path.join(workFolder, 'xlsx', 'xlsxOri')
-    confFolder = path.join(__dirname, '..', 'config')
+    let confFolder = path.join(__dirname, '..', 'config')
     // console.log(JSON.stringify(answers, null, '  '));
 
     let files = fs.readdirSync(workFolderJSON)
 
     let workbook = excelbuilder.createWorkbook(workFolderXLSX, 'extract.xlsx')
 
-    _.each(files, function(file, key) {
+    _.each(files, function (file, key) {
       console.time('extract')
       let fileBasename = path.basename(file, '.json')
       let jsonFile = path.join(workFolderJSON, file)
@@ -118,12 +118,11 @@ function extract (folder) {
     workbook.save(function (err) {
       if (err) throw err
       else {
-        console.log(green('extract.xlsx') +' was created')
+        console.log(green('extract.xlsx') + ' was created')
         console.timeEnd('extract')
       }
     })
-
-  });
+  })
 }
 
 module.exports = extract

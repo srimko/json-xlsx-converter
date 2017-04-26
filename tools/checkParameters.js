@@ -1,6 +1,6 @@
-const fs = require('fs')
+// const fs = require('fs')
 const _ = require('lodash')
-const path = require('path')
+// const path = require('path')
 
 function checkParameters (params) {
   params = params.slice(2)
@@ -11,33 +11,33 @@ function checkParameters (params) {
       folder = 'default'
     } else {
       let pathSplited = params[1].split('/')
-      _.each(pathSplited, function(value, key) {
-        if(pathSplited[key + 1] === 'src') {
+      _.each(pathSplited, function (value, key) {
+        if (pathSplited[key + 1] === 'src') {
           folder = pathSplited[key]
         }
       })
     }
 
     return {
-      "command": 'init',
-      "folder": folder,
-      "path": params[1]
+      'command': 'init',
+      'folder': folder,
+      'path': params[1]
     }
   } else if ((_.indexOf(params, '-extract') !== -1) || (_.indexOf(params, '-e') !== -1)) {
     if (params[1] === undefined) {
       params[1] = 'default'
     }
     return {
-      "command": 'extract',
-      "folder": params[1],
+      'command': 'extract',
+      'folder': params[1]
     }
   } else if ((_.indexOf(params, '-populate') !== -1) || (_.indexOf(params, '-p') !== -1)) {
     if (params[1] === undefined) {
       params[1] = ''
     }
     return {
-      "command": 'populate',
-      "language": params[1],
+      'command': 'populate',
+      'language': params[1]
     }
   }
 }

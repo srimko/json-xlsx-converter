@@ -1,12 +1,12 @@
 const fs = require('fs-extra')
 const XLSX = require('xlsx')
 const _ = require('lodash')
-const nestedProperty = require("nested-property")
+const nestedProperty = require('nested-property')
 const chalk = require('chalk')
-const red = chalk.red
-const green = chalk.green
-const grey = chalk.grey
-const blue = chalk.blue
+// const red = chalk.red
+// const green = chalk.green
+// const grey = chalk.grey
+// const blue = chalk.blue
 const yellow = chalk.yellow
 
 const inquirer = require('inquirer')
@@ -19,8 +19,8 @@ function populate (language) {
   let workFolderXLSX
 
   let folders = fs.readdirSync(folderTranslation)
-  folders = _.filter(folders, function(folder) {
-    if(!/(.DS_Store)/.test(folder)){
+  folders = _.filter(folders, function (folder) {
+    if (!/(.DS_Store)/.test(folder)) {
       return true
     }
   })
@@ -32,20 +32,20 @@ function populate (language) {
     choices: folders
   }).then(function (answers) {
     workFolder = path.join(__dirname, '..', folderTranslation, answers.folder)
-    workFolderJSONOri = path.join(workFolder, 'json', 'jsonOri')
+    let workFolderJSONOri = path.join(workFolder, 'json', 'jsonOri')
     workFolderJSON = path.join(workFolder, 'json', 'jsonTrad')
     workFolderXLSX = path.join(workFolder, 'xlsx', 'xlsxTrad')
 
-    let folders =  fs.readdirSync(workFolderXLSX)
+    let folders = fs.readdirSync(workFolderXLSX)
 
-    folders = _.filter(folders, function(folder) {
+    folders = _.filter(folders, function (folder) {
       let pathFolder = path.join(workFolderXLSX, folder)
-      if(!fs.statSync(pathFolder).isDirectory()) return false
+      if (!fs.statSync(pathFolder).isDirectory()) return false
       let files = fs.readdirSync(pathFolder)
-      if(files.length) return true
+      if (files.length) return true
     })
 
-    if(folders.length !== 0) {
+    if (folders.length !== 0) {
       inquirer.prompt({
         type: 'list',
         name: 'folder',
@@ -59,7 +59,7 @@ function populate (language) {
         const workbook = XLSX.readFile(extractFile)
         const sheetNameList = workbook.SheetNames
 
-        _.each(sheetNameList, function(JSONsheet, key) {
+        _.each(sheetNameList, function (JSONsheet, key) {
           console.time('populate-' + JSONsheet)
           let JSONsheetdata = XLSX.utils.sheet_to_json(workbook.Sheets[JSONsheet])
 
@@ -80,7 +80,6 @@ function populate (language) {
     } else {
       console.log(yellow('Please don\'t forget to put a file in language directory'))
     }
-
   })
 }
 

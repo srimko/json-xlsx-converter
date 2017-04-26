@@ -6,7 +6,7 @@ function checkFileExistsSync (filepath) {
     fs.accessSync(filepath, fs.F_OK)
     isExists = true
   } catch (e) {
-    if(e) console.log(e)
+    if (e) console.log(e)
   }
   return isExists
 }
