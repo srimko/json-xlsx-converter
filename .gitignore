@@ -1,4 +1,5 @@
 node_modules
-*.xlsx
-*.json
+translation
 .test
+_json
+_xlsx

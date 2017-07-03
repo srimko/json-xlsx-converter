@@ -2,16 +2,16 @@ const fs = require('fs-extra')
 const _ = require('lodash')
 const path = require('path')
 const chalk = require('chalk')
-// const red = chalk.red
+const red = chalk.red
 const green = chalk.green
-// const grey = chalk.grey
-// const blue = chalk.blue
+const grey = chalk.grey
+const blue = chalk.blue
 
 const Entities = require('html-entities').AllHtmlEntities
 const htmlToText = require('html-to-text')
 const excelbuilder = require('msexcel-builder')
 
-// const log = require('single-line-log').stdout
+const log = require('single-line-log').stdout
 const inquirer = require('inquirer')
 
 function extract (folder) {

@@ -15,6 +15,7 @@ const _ = require('lodash')
 const init = require('./commands/init')
 const extract = require('./commands/extract')
 const populate = require('./commands/populate')
+const removeDuplicate = require('./commands/removeDuplicate')
 const checkParameters = require('./tools/checkParameters')
 
 let functionToExecute = checkParameters(process.argv)
@@ -30,6 +31,9 @@ switch (functionToExecute.command) {
     break
   case 'populate':
     populate(functionToExecute.language)
+    break
+  case 'removeDuplicate':
+    removeDuplicate()
     break
   default:
     console.log('Bad commands')

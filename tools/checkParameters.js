@@ -39,6 +39,14 @@ function checkParameters (params) {
       'command': 'populate',
       'language': params[1]
     }
+  } else if ((_.indexOf(params, '-removeDuplicate') !== -1) || (_.indexOf(params, '-rd') !== -1)) {
+    if (params[1] === undefined) {
+      params[1] = ''
+    }
+    return {
+      'command': 'removeDuplicate',
+      'language': params[1]
+    }
   }
 }
 
