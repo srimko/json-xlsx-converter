@@ -16,6 +16,7 @@ const init = require('./commands/init')
 const extract = require('./commands/extract')
 const populate = require('./commands/populate')
 const removeDuplicate = require('./commands/removeDuplicate')
+const hardRemoveDuplicate = require('./commands/hardRemoveDuplicate')
 const checkParameters = require('./tools/checkParameters')
 
 let functionToExecute = checkParameters(process.argv)
@@ -34,6 +35,9 @@ switch (functionToExecute.command) {
     break
   case 'removeDuplicate':
     removeDuplicate()
+    break
+  case 'hardRemoveDuplicate':
+    hardRemoveDuplicate()
     break
   default:
     console.log('Bad commands')

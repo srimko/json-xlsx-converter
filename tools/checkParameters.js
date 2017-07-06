@@ -47,6 +47,14 @@ function checkParameters (params) {
       'command': 'removeDuplicate',
       'language': params[1]
     }
+  } else if ((_.indexOf(params, '-hardRemoveDuplicate') !== -1) || (_.indexOf(params, '-rd') !== -1)) {
+    if (params[1] === undefined) {
+      params[1] = ''
+    }
+    return {
+      'command': 'hardRemoveDuplicate',
+      'language': params[1]
+    }
   }
 }
 
