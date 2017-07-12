@@ -55,6 +55,14 @@ function checkParameters (params) {
       'command': 'hardRemoveDuplicate',
       'language': params[1]
     }
+  } else if ((_.indexOf(params, '-hardAddDuplicate') !== -1) || (_.indexOf(params, '-rd') !== -1)) {
+    if (params[1] === undefined) {
+      params[1] = ''
+    }
+    return {
+      'command': 'hardAddDuplicate',
+      'language': params[1]
+    }
   }
 }
 

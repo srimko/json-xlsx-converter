@@ -16,12 +16,12 @@ const green = chalk.green
 function hardRemoveDuplicate () {
   console.log('hardRemoveDuplicate')
 
-  let path = '/Users/srimko/lab_node/json-xlsx-converter/translation/web-course03/xlsx/xlsxOri/extract-course03.xlsx'
+  let path = '/Users/srimko/lab_node/json-xlsx-converter/translation/web-course01/xlsx/xlsxOri/extract-course01.xlsx'
 
   const workbook = XLSX.readFile(path)
   const sheetNameList = workbook.SheetNames
 
-  let newXLSX = excelbuilder.createWorkbook('./', 'extract-course03-light.xlsx')
+  let newXLSX = excelbuilder.createWorkbook('./', 'extract-course01-light-test.xlsx')
 
   let newFile = []
 
@@ -43,7 +43,8 @@ function hardRemoveDuplicate () {
     _.each(newFile, function (value, key) {
       sheet.set(1, key + 2, value.Reference)
       sheet.set(2, key + 2, value.Source)
-      sheet.set(3, key + 2, value.Target)
+      // sheet.set(3, key + 2, value.Target)
+      sheet.set(3, key + 2, 'cedrick')
       sheet.set(4, key + 2, value.Clean)
     })
   })
