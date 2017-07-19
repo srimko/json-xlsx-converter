@@ -1,4 +1,4 @@
-// const fs = require('fs-extra')
+const fs = require('fs-extra')
 const XLSX = require('xlsx')
 const excelbuilder = require('msexcel-builder')
 const _ = require('lodash')
@@ -10,89 +10,108 @@ const green = chalk.green
 // const blue = chalk.blue
 // const yellow = chalk.yellow
 
-// const inquirer = require('inquirer')
-// const path = require('path')
+const inquirer = require('inquirer')
+const path = require('path')
 
 function removeDuplicate () {
   console.log('removeDuplicate')
 
-  let path = '/Users/srimko/lab_node/json-xlsx-converter/translation/web-course01/xlsx/xlsxOri/extract.xlsx'
+  let folderTranslation = 'translation'
+  let workFolder
+  let workFolderXLSXOri
+  let workFolderXLSXOriLanguage
 
-  const workbook = XLSX.readFile(path)
+  let folders = fs.readdirSync(folderTranslation)
+  folders = _.filter(folders, function (folder) {
+    if (!/(.DS_Store)/.test(folder)) {
+      return true
+    }
+  })
+
+  inquirer.prompt({
+    type: 'list',
+    name: 'folder',
+    message: 'Select a folder :',
+    choices: folders
+  }).then(function (answers) {
+    console.log(answers)
+    workFolder = path.join(__dirname, '..', folderTranslation, answers.folder)
+    // let workFolderJSONOri = path.join(workFolder, 'json', 'jsonOri')
+    // workFolderJSON = path.join(workFolder, 'json', 'jsonTrad')
+    workFolderXLSXOri = path.join(workFolder, 'xlsx', 'xlsxOri')
+
+    let languages = fs.readdirSync(workFolderXLSXOri)
+    languages = _.filter(languages, function (folder) {
+      if (!/(.DS_Store)/.test(folder)) {
+        return true
+      }
+    })
+
+    inquirer.prompt({
+      type: 'list',
+      name: 'file',
+      message: 'Select a file :',
+      choices: languages
+    }).then(function (answers) {
+      let file = answers.file
+      workFolderXLSXOriLanguage = path.join(workFolderXLSXOri, file)
+      remove(workFolderXLSXOriLanguage , workFolderXLSXOri)
+    })
+  })
+}
+
+function remove (file, path) {
+  console.log(file)
+  // let path = '/Users/srimko/lab_node/json-xlsx-converter/translation/web-course01/xlsx/xlsxOri/extract.xlsx'
+
+  const workbook = XLSX.readFile(file)
   const sheetNameList = workbook.SheetNames
 
-  let xlsxFile = excelbuilder.createWorkbook('./', 'file.xlsx')
-  var sheet1 = xlsxFile.createSheet('sheet1', 4, 1000)
-
-  sheet1.set(1, 1, 'Reference')
-  sheet1.set(2, 1, 'Source')
-  sheet1.set(3, 1, 'Target')
-  sheet1.set(4, 1, 'Clean')
+  let xlsxFile = excelbuilder.createWorkbook(path, 'extract-clean.xlsx')
 
   _.each(sheetNameList, function (JSONsheet, key) {
+    let duplicateToExport = []
     let JSONsheetdata = XLSX.utils.sheet_to_json(workbook.Sheets[JSONsheet])
 
-    let duplicate = ''
-    // let duplicateObject = {}
-    let resetRow = 0
+    var sheet = xlsxFile.createSheet(JSONsheet, 4, 1000)
+    sheet.set(1, 1, 'Reference')
+    sheet.width(1, 25)
+    sheet.set(2, 1, 'Source')
+    sheet.width(2, 70)
+    sheet.set(3, 1, 'Target')
+    sheet.width(3, 70)
+    sheet.set(4, 1, 'Clean')
+    sheet.width(4, 70)
+
     _.each(JSONsheetdata, function (data, key) {
-      if (JSONsheet === 'components') {
-        let valueReference = ''
-        // let arrayReference = []
-
-        if (key === 0) {
-          if (data.Target === JSONsheetdata[key + 1].Target) {
-            // duplicate = data.Reference
+      let duplicateObject = {reference: '', target: ''}
+      _.each(JSONsheetdata, function (data1, key1) {
+        if (data.Target === data1.Target) {
+          // console.log(data.Reference + ' ' + data1.Reference)
+          if (duplicateObject.reference !== '') {
+            duplicateObject.reference = duplicateObject.reference + '/' + data1.Reference
+            duplicateObject.source = data1.Source
+            duplicateObject.target = data1.Target
+            duplicateObject.clean = data1.Clean
           } else {
-            sheet1.set(1, key + 2 - resetRow, data.Reference)
-            sheet1.set(2, key + 2 - resetRow, data.Source)
-            sheet1.set(3, key + 2 - resetRow, data.Target)
-            sheet1.set(4, key + 2 - resetRow, data.Clean)
-          }
-        } else if (key > 0 && key < JSONsheetdata.length - 1) {
-          valueReference = data.Target
-
-          if (valueReference === JSONsheetdata[key + 1].Target) {
-            // Contact ref plus ref next
-            if (duplicate !== '') {
-              duplicate = duplicate + ',' + JSONsheetdata[key + 1].Reference
-            } else {
-              duplicate = data.Reference + ',' + JSONsheetdata[key + 1].Reference
-            }
-            resetRow++
-            console.log(resetRow)
-          } else {
-            if (duplicate !== '') {
-              console.log(duplicate)
-              sheet1.set(1, key + 2 - resetRow, duplicate)
-              sheet1.set(2, key + 2 - resetRow, data.Source)
-              sheet1.set(3, key + 2 - resetRow, valueReference)
-              sheet1.set(4, key + 2 - resetRow, data.Clean)
-            } else {
-              sheet1.set(1, key + 2 - resetRow, data.Reference)
-              sheet1.set(2, key + 2 - resetRow, data.Source)
-              sheet1.set(3, key + 2 - resetRow, data.Target)
-              sheet1.set(4, key + 2 - resetRow, data.Clean)
-            }
-            valueReference = ''
-            duplicate = ''
-            // sheet1.set(1, key + 2, data.Reference)
-            // sheet1.set(2, key + 2, data.Source)
-            // sheet1.set(3, key + 2, data.Target)
-            // sheet1.set(4, key + 2, data.Clean)
-          }
-
-          // if(data.Target === valueReference)
-        } else {
-          if (duplicate !== '') {
-            console.log(duplicate)
-            sheet1.set(1, key + 2 - resetRow, duplicate)
-            sheet1.set(2, key + 2 - resetRow, data.Source)
-            sheet1.set(3, key + 2 - resetRow, valueReference)
-            sheet1.set(4, key + 2 - resetRow, data.Clean)
+            duplicateObject.reference = data1.Reference
+            duplicateObject.source = data1.Source
+            duplicateObject.target = data1.Target
+            duplicateObject.clean = data1.Clean
           }
         }
-      }
+      })
+
+      // console.log(duplicateObject)
+      duplicateToExport.push(duplicateObject)
+    })
+    duplicateToExport = _.uniqBy(duplicateToExport, 'reference')
+
+    _.each(duplicateToExport, function (data, key) {
+      sheet.set(1, key + 2, data.reference)
+      sheet.set(2, key + 2, data.source)
+      sheet.set(3, key + 2, data.target)
+      sheet.set(4, key + 2, data.clean)
     })
   })
 
