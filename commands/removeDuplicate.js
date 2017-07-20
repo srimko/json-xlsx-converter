@@ -97,7 +97,6 @@ function remove (file, path) {
         }
       })
 
-      // console.log(duplicateObject)
       duplicateToExport.push(duplicateObject)
     })
     duplicateToExport = _.uniqBy(duplicateToExport, 'reference')
@@ -113,7 +112,7 @@ function remove (file, path) {
   xlsxFile.save(function (err) {
     if (err) throw err
     else {
-      console.log(green('file.xlsx') + ' was created')
+      console.log(green('extract-clean.xlsx') + ' was created')
     }
   })
 }
