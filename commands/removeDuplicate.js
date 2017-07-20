@@ -36,8 +36,6 @@ function removeDuplicate () {
   }).then(function (answers) {
     console.log(answers)
     workFolder = path.join(__dirname, '..', folderTranslation, answers.folder)
-    // let workFolderJSONOri = path.join(workFolder, 'json', 'jsonOri')
-    // workFolderJSON = path.join(workFolder, 'json', 'jsonTrad')
     workFolderXLSXOri = path.join(workFolder, 'xlsx', 'xlsxOri')
 
     let languages = fs.readdirSync(workFolderXLSXOri)
@@ -55,15 +53,12 @@ function removeDuplicate () {
     }).then(function (answers) {
       let file = answers.file
       workFolderXLSXOriLanguage = path.join(workFolderXLSXOri, file)
-      remove(workFolderXLSXOriLanguage , workFolderXLSXOri)
+      remove(workFolderXLSXOriLanguage, workFolderXLSXOri)
     })
   })
 }
 
 function remove (file, path) {
-  console.log(file)
-  // let path = '/Users/srimko/lab_node/json-xlsx-converter/translation/web-course01/xlsx/xlsxOri/extract.xlsx'
-
   const workbook = XLSX.readFile(file)
   const sheetNameList = workbook.SheetNames
 

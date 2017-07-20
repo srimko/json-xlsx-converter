@@ -32,6 +32,9 @@ Dans le répertoir config vous pouvez rajouter d'autres fichiers `.conf`.
 
 Les fichiers `*.conf` permttent de de renseigner quels sont les propriétés qui doivent retenu.
 
+## TODO
+ - Commenter le code
+
 ## Auteur
 
 Alexandre Cédrick aka *srimko* <alexandre.cedrick@gmail.com> fait avec :heart: pour Yes'N'You Digital :smirk:

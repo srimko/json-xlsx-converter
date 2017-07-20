@@ -53,7 +53,15 @@ function populate (language) {
         choices: folders
       }).then(function (answers) {
         let files = fs.readdirSync(path.join(workFolderXLSX, answers.folder))
-        let extractFile = path.join(workFolderXLSX, answers.folder, files[0])
+
+        // Récupération du fichier
+        let file = _.filter(files, function (file) {
+          if (!/(.DS_Store)/.test(file) && !/(_)/.test(file)) {
+            return true
+          }
+        })
+
+        let extractFile = path.join(workFolderXLSX, answers.folder, file[0])
         let jsonTradFolder = path.join(workFolderJSON, answers.folder)
 
         const workbook = XLSX.readFile(extractFile)
@@ -68,7 +76,18 @@ function populate (language) {
           let JSONfile = fs.readJsonSync(JSONFilePathOri, 'UTF-8')
 
           _.each(JSONsheetdata, function (value) {
-            nestedProperty.set(JSONfile, value.Reference, value.Target)
+            // nestedProperty.set(JSONfile, value.Reference, value.Target)
+            let referenceSplited = value.Reference.split('/')
+
+            if (referenceSplited.length > 1) {
+              _.each(referenceSplited, function (ref, key) {
+                // console.log(ref)
+                nestedProperty.set(JSONfile, ref, value.Source)
+              })
+            } else {
+              // console.log(value.Reference)
+              nestedProperty.set(JSONfile, value.Reference, value.Source)
+            }
           })
 
           fs.copySync(JSONFilePathOri, path.join(jsonTradFolder, JSONsheet + '.json'))
