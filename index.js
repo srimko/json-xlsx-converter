@@ -17,7 +17,7 @@ const extract = require('./commands/extract')
 const populate = require('./commands/populate')
 const removeDuplicate = require('./commands/removeDuplicate')
 const hardRemoveDuplicate = require('./commands/hardRemoveDuplicate')
-const hardAddDuplicate = require('./commands/hardAddDuplicate')
+// const hardAddDuplicate = require('./commands/hardAddDuplicate')
 const checkParameters = require('./tools/checkParameters')
 
 let functionToExecute = checkParameters(process.argv)
